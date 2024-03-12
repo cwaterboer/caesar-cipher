@@ -3,40 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rot13 Converter</title>
+    <title>ROT13 Decoder</title>
 </head>
 <body>
 
-<h2>Rot13 Converter</h2>
+<h2>ROT13 Decoder</h2>
 
-<label for="textInput">Enter text to convert:</label>
-<input type="text" id="textInput" placeholder="Enter text">
+<label for="encodedText">Enter ROT13 encoded text:</label>
+<input type="text" id="encodedText" placeholder="Enter ROT13 encoded text">
 
-<button onclick="convertToRot13()">Convert to Rot13</button>
+<button onclick="decodeRot13()">Decode ROT13</button>
 
-<p id="resultMessage"></p>
+<p id="decodedText"></p>
 
 <script>
-    function convertToRot13() {
-        var inputText = document.getElementById('textInput').value;
-        var resultMessage = document.getElementById('resultMessage');
+    function decodeRot13() {
+        var encodedText = document.getElementById('encodedText').value;
+        var decodedTextElement = document.getElementById('decodedText');
 
-        if (inputText.trim() === '') {
-            resultMessage.innerHTML = "Please enter text.";
+        if (encodedText.trim() === '') {
+            decodedTextElement.innerHTML = "Please enter ROT13 encoded text.";
             return;
         }
 
-        var originalText = applyRot13(inputText);
-        resultMessage.innerHTML = "Original Text: " + originalText;
-    }
-
-    function applyRot13(text) {
-        return text.replace(/[a-zA-Z]/g, function (char) {
+        var decodedText = encodedText.replace(/[a-zA-Z]/g, function (char) {
             var baseCharCode = char <= 'Z' ? 'A'.charCodeAt(0) : 'a'.charCodeAt(0);
             return String.fromCharCode((char.charCodeAt(0) - baseCharCode + 13) % 26 + baseCharCode);
         });
+
+        decodedTextElement.innerHTML = "Decoded Text: " + decodedText;
     }
 </script>
 
 </body>
 </html>
+
