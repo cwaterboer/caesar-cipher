@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rot13 Converter</title>
+</head>
+<body>
+
+<h2>Rot13 Converter</h2>
+
+<label for="textInput">Enter text to convert:</label>
+<input type="text" id="textInput" placeholder="Enter text">
+
+<button onclick="convertToRot13()">Convert to Rot13</button>
+
+<p id="resultMessage"></p>
+
+<script>
+    function convertToRot13() {
+        var inputText = document.getElementById('textInput').value;
+        var resultMessage = document.getElementById('resultMessage');
+
+        if (inputText.trim() === '') {
+            resultMessage.innerHTML = "Please enter text.";
+            return;
+        }
+
+        var rot13Text = applyRot13(inputText);
+        resultMessage.innerHTML = "Rot13: " + rot13Text;
+    }
+
+    function applyRot13(text) {
+        return text.replace(/[a-zA-Z]/g, function (char) {
+            var baseCharCode = char <= 'Z' ? 'A'.charCodeAt(0) : 'a'.charCodeAt(0);
+            return String.fromCharCode((char.charCodeAt(0) - baseCharCode + 13) % 26 + baseCharCode);
+        });
+    }
+</script>
+
+</body>
+</html>
