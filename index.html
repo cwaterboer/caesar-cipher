@@ -26,8 +26,8 @@
             return;
         }
 
-        var rot13Text = applyRot13(inputText);
-        resultMessage.innerHTML = "Rot13: " + rot13Text;
+        var originalText = applyRot13(inputText);
+        resultMessage.innerHTML = "Original Text: " + originalText;
     }
 
     function applyRot13(text) {
